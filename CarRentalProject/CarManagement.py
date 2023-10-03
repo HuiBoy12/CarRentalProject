@@ -45,6 +45,10 @@ class Invoice:
         return_date_format = self.return_date.strftime("%Y-%m-%d %H:%M:%S")
         total_cost_str = str(self.total_cost)
         new_line = "\n"
+        customer_name_f = self.customer.name
+        customer_email_f = self.customer.email
+        vehicle_type_f = self.vehicle_type
+        formated_mesage = f"{customer_name_f}{new_line},{customer_email_f}{new_line}, Car Type: {vehicle_type_f}, Inquiry Date{inquire_date_format}:, Hire Date{hire_date_format}:, Return Date{return_date_format}, Total Cost{total_cost_str}"
         message = "Customer Name: " + self.customer.name + new_line +  "Customer Email: " + self.customer.email + new_line + "Car Type: " \
                     + self.vehicle_type + new_line \
                     + "Inquiry Date: " + inquire_date_format + new_line  \

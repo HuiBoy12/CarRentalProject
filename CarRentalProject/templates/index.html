@@ -1,21 +1,75 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <h1>Car Management</h1>
-    </head>
-    <body>
-        <!-- Add a form with a button -->
+<head>
+    <title>Car Management</title>
+    <style>
+        /* Styles for tabs */
+        .tab {
+            display: none;
+        }
+
+        /* Style the tab links */
+        .tab-link-container {
+            white-space: nowrap; /* Prevent wrapping to the next line */
+        }
+
+        .tab-link {
+            display: inline-block; /* Display links horizontally */
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #f2f2f2;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            margin: 0 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Style the active tab link */
+        .active {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Style the header/title */
+        h1 {
+            background-color: black;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Car Management</h1>
+
+    <!-- Tab Links -->
+    <div class="tab-link-container">
+        <div class="tab-link" onclick="openTab(event, 'get-customer')">Get Customer</div>
+        <div class="tab-link" onclick="openTab(event, 'add-customer')">Add Customer</div>
+        <div class="tab-link" onclick="openTab(event, 'update-customer')">Update Customer</div>
+        <div class="tab-link" onclick="openTab(event, 'remove-customer')">Remove Customer</div>
+    </div>
+
+    <!-- Tab Contents -->
+    <div id="get-customer" class="tab">
         <form method="GET" action="/get_customers">
+            <h2>Get Customer</h2>          
             <button type="submit">Get Customer</button>
         </form>
-        <br>
-        </br>
+    </div>
+
+    <div id="add-customer" class="tab">
         <form method="POST" action="/add_customer_web">
             <h2>Add Customer</h2>
             <input type="text" name="name" placeholder="Name">
             <input type="text" name="email" placeholder="Email">
             <button type="submit">Add Customer</button>
         </form>
+    </div>
+
+    <div id="update-customer" class="tab">
         <form method="POST" action="/update_customer_web"> 
             <h2>Update Customer</h2>
             <input type="text" name="new name" placeholder="New Name">
@@ -24,11 +78,34 @@
             <input type="text" name="email" placeholder="Email">
             <button type="submit">Update Customer</button>
         </form>
+    </div>
+
+    <div id="remove-customer" class="tab">
         <form method="POST" action="/remove_customer_web">
             <h2>Remove Customer</h2>
             <input type="text" name="name" placeholder="Name">
             <input type="text" name="email" placeholder="Email">
             <button type="submit">Remove Customer</button>
         </form>
-    </body>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tab, tabLinks;
+            tab = document.getElementsByClassName("tab");
+            for (i = 0; i < tab.length; i++) {
+                tab[i].style.display = "none";
+            }
+            tabLinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tabLinks.length; i++) {
+                tabLinks[i].className = tabLinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Open the default tab (e.g., "Get Customer")
+        document.getElementById("get-customer").style.display = "block";
+    </script>
+</body>
 </html>
